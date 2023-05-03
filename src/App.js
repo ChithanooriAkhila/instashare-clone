@@ -8,6 +8,8 @@ import LoginForm from './components/LoginForm'
 // import Cart from './components/Cart'
 import NotFound from './components/NotFound'
 // import ProtectedRoute from './components/ProtectedRoute'
+import Header from './components/Header'
+import UserStoriesList from './components/UserStoriesList'
 
 import './App.css'
 
@@ -16,6 +18,8 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/login" component={LoginForm} />
+        <UserStoriesList />
+        <Header />
         {/* <ProtectedRoute exact path="/" component={Home} />
         <ProtectedRoute exact path="/products" component={Products} />
         <ProtectedRoute
