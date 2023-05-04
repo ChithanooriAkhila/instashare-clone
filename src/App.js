@@ -12,6 +12,7 @@ import Header from './components/Header'
 import UserStoriesList from './components/UserStoriesList'
 import InstaSharePostsListHome from './components/InstaSharePostsListHome'
 import MyProfile from './components/MyProfile'
+import UserProfile from './components/UserProfile'
 
 import './App.css'
 
@@ -19,8 +20,10 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <Route exact path="/users/:userId" component={UserProfile} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/myProfile" component={MyProfile} />
+
         <InstaSharePostsListHome />
         <UserStoriesList />
         <Header />

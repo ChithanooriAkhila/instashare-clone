@@ -6,7 +6,7 @@ import './index.css'
 
 class Profile extends Component {
   render() {
-    const {profileDetails} = this.props
+    const {profileDetails, profileType} = this.props
     const {
       userId,
       userName,
@@ -23,7 +23,11 @@ class Profile extends Component {
       <div className="main-container">
         <div className="top-my-profile-container">
           <div>
-            <img src={profilePic} alt="my profile" />
+            <img
+              src={profilePic}
+              alt={profileType === 'user' ? 'user profile' : 'my profile'}
+              className="profile-pic"
+            />
           </div>
           <div className="info-container">
             <h1>{userName}</h1>
@@ -40,7 +44,11 @@ class Profile extends Component {
           <ul className="stories-container">
             {stories.map(story => (
               <li key={story.id}>
-                <img src={story.image} alt="my story" className="story-image" />
+                <img
+                  src={story.image}
+                  alt={profileType === 'user' ? 'user story' : 'my story'}
+                  className="story-image"
+                />
               </li>
             ))}
           </ul>
@@ -55,7 +63,10 @@ class Profile extends Component {
               {posts.length > 0 ? (
                 posts.map(post => (
                   <li key={post.id} className="post-image">
-                    <img src={post.image} alt="my post" />
+                    <img
+                      src={post.image}
+                      alt={profileType === 'user' ? 'user post' : 'my post'}
+                    />
                   </li>
                 ))
               ) : (

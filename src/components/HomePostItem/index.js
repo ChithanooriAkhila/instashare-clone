@@ -4,6 +4,7 @@ import {FaRegComment} from 'react-icons/fa'
 import {BiShareAlt} from 'react-icons/bi'
 import {FcLike} from 'react-icons/fc'
 import Cookies from 'js-cookie'
+import {Link} from 'react-router-dom'
 
 import './index.css'
 
@@ -46,6 +47,7 @@ class HomePostItem extends Component {
   render() {
     const {homePostDetails} = this.props
     const {
+      userId,
       userName,
       profilePic,
       postDetails,
@@ -62,7 +64,9 @@ class HomePostItem extends Component {
             alt="post author profile"
             className="profile-pic"
           />
-          <p>{userName}</p>
+          <Link to={`/users/${userId}`}>
+            <p>{userName}</p>
+          </Link>
         </div>
         <div>
           <img src={imageUrl} alt="post" className="post-image" />
