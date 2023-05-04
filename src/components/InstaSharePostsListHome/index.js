@@ -28,8 +28,10 @@ class InstaSharePostsListHome extends Component {
     })
 
     const jwtToken = Cookies.get('jwt_token')
+    const {searchInput} = this.props
+    console.log(searchInput)
 
-    const apiUrl = 'https://apis.ccbp.in/insta-share/posts'
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -38,7 +40,7 @@ class InstaSharePostsListHome extends Component {
     }
     const response = await fetch(apiUrl, options)
 
-    if (response.ok === true) {
+    if (response.ok) {
       const fetchedData = await response.json()
       const updatedData = fetchedData.posts.map(post => ({
         postId: post.post_id,
