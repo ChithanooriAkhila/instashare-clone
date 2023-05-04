@@ -1,12 +1,10 @@
 import './index.css'
-// import {withRouter} from 'react-router-dom'
 
 const NotFound = props => {
   const homePage = () => {
     const {history} = props
     history.replace('/')
   }
-
   return (
     <div className="not-found-container">
       <img
