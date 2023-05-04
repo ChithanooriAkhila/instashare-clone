@@ -3,13 +3,19 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import HomePostItem from '../HomePostItem'
 
-/* Add css to your project */
 import './index.css'
+
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
 
 class InstaSharePostsListHome extends Component {
   state = {
     homePostsList: [],
-    isLoading: true,
+    apiStatus: apiStatusConstants.initial,
   }
 
   componentDidMount() {
@@ -18,7 +24,7 @@ class InstaSharePostsListHome extends Component {
 
   getHomePostsList = async () => {
     this.setState({
-      isLoading: true,
+      apiStatus: apiStatusConstants.inProgress,
     })
 
     const jwtToken = Cookies.get('jwt_token')
@@ -54,31 +60,58 @@ class InstaSharePostsListHome extends Component {
       console.log(updatedData)
       this.setState({
         homePostsList: updatedData,
-        isLoading: false,
+        apiStatus: apiStatusConstants.success,
       })
     }
   }
 
-  render() {
-    const {isLoading, homePostsList} = this.state
-    // console.log(homePostsList)
+  renderPostListSuccessView = () => {
+    const {homePostsList} = this.state
+
     return (
       <div className="main-container">
         <div className="slick-container">
-          {!isLoading ? (
-            <ul>
-              {homePostsList.map(postItem => (
-                <HomePostItem key={postItem.postId} />
-              ))}
-            </ul>
-          ) : (
-            <div className="loader-container" data-testid="loader">
-              <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
-            </div>
-          )}
+          <ul>
+            {homePostsList.map(postItem => (
+              <HomePostItem key={postItem.postId} homePostDetails={postItem} />
+            ))}
+          </ul>
         </div>
       </div>
     )
+  }
+
+  renderLoadingView = () => (
+    <div className="loader-container" data-testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+    </div>
+  )
+
+  renderPostsListFailureView = () => (
+    <div>
+      <img
+        src="https://res.cloudinary.com/dnewm2put/image/upload/v1683176679/alert-triangle_hyou2e.svg"
+        alt="error"
+      />
+      <h1>something went wrong</h1>
+      <button type="button" onClick={this.getHomePostsList()}>
+        Try Again
+      </button>
+    </div>
+  )
+
+  render() {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderPostListSuccessView()
+      case apiStatusConstants.failure:
+        return this.renderPostsListFailureView()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
+    }
   }
 }
 
