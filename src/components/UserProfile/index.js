@@ -65,6 +65,8 @@ class UserProfile extends Component {
         userProfileDetails: updatedData,
         apiStatus: apiStatusConstants.success,
       })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
@@ -84,9 +86,9 @@ class UserProfile extends Component {
     <div>
       <img
         src="https://res.cloudinary.com/dnewm2put/image/upload/v1683176679/alert-triangle_hyou2e.svg"
-        alt="error"
+        alt="failure view"
       />
-      <h1>something went wrong</h1>
+      <h1>Something went wrong. Please try again</h1>
       <button type="button" onClick={this.getUserProfile()}>
         Try Again
       </button>

@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Route, Switch, Redirect} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import LoginForm from './components/LoginForm'
 import NotFound from './components/NotFound'
@@ -16,15 +16,8 @@ class App extends Component {
       <Switch>
         <Route exact path="/login" component={LoginForm} />
         <ProtectedRoute exact path="/" component={Home} />
-        <ProtectedRoute exact path="/myProfile" component={MyProfile} />
-        <ProtectedRoute exact path="/users/:userId" component={UserProfile} />
-
-        {/* <ProtectedRoute exact path="/products" component={Products} />
-        <ProtectedRoute
-          exact
-          path="/products/:id"
-          component={ProductItemDetails}
-        />  */}
+        <ProtectedRoute exact path="/my-profile" component={MyProfile} />
+        <Route exact path="/users/:userId" component={UserProfile} />
         <Route path="/not-found" component={NotFound} />
         <Redirect to="/not-found" />
       </Switch>
