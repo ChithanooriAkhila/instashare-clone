@@ -11,6 +11,7 @@ import NotFound from './components/NotFound'
 import Header from './components/Header'
 import UserStoriesList from './components/UserStoriesList'
 import InstaSharePostsListHome from './components/InstaSharePostsListHome'
+import MyProfile from './components/MyProfile'
 
 import './App.css'
 
@@ -19,17 +20,18 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/myProfile" component={MyProfile} />
         <InstaSharePostsListHome />
         <UserStoriesList />
         <Header />
+
         {/* <ProtectedRoute exact path="/" component={Home} />
         <ProtectedRoute exact path="/products" component={Products} />
         <ProtectedRoute
           exact
           path="/products/:id"
           component={ProductItemDetails}
-        />
-        <ProtectedRoute exact path="/cart" component={Cart} /> */}
+        /> */}
         <Route path="/not-found" component={NotFound} />
         <Redirect to="/not-found" />
       </Switch>
